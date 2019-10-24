@@ -21,8 +21,8 @@ def decorator(name, daemon):
     def decor(func):
         def wrapper(*args, **kwargs):
             result = []
-            for i in list_name_thread:
-                t = Thread(target=func, args=args, kwargs=kwargs, name=name + str(i), daemon=daemon)
+            for i in list_http:
+                t = Thread(target=func, args=(i, "a"), kwargs=kwargs, name=name + str(i), daemon=daemon)
                 result.append(t.start())
                 print(t.getName())
                 print(t.isDaemon())
@@ -36,8 +36,7 @@ def download(http, name):
     urllib.request.urlretrieve(http, f'{name}.png')
 
 
-for i in range(len(list_http)):
-    download(list_http[i], i)
+download()
 
 
 # https://linuxconfig.org/how-to-perform-http-requests-with-python-part-2-the-request-library

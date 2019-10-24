@@ -11,13 +11,16 @@ class Stack:
         del(self._list_stack[-1])
         return x
 
-    def get_size(self):
+    def size(self):
         return len(self._list_stack)
+
+    def top(self):
+        return self._list_stack[0]
 
     def is_empty(self):
         return self._list_stack == []
 
-    def del_stack(self):
+    def clear(self):
         self._list_stack = []
 
 
@@ -27,9 +30,10 @@ a.push(20)
 a.push(100)
 a.push('q')
 print(a.pop())
-print(a.get_size())
+print(a.size())
 print(a.is_empty())
-a.del_stack()
+print(a.top())
+a.clear()
 print(a.is_empty())
 
 
