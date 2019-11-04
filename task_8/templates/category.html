@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>VentPortal</title>
+    {% endif %}
+</head>
+<body>
+    <center><h1>VentPortal</h1></center>
+
+    <div align="left">
+        <h1>Product category</h1>
+        {% for category in category %}
+            <p><a href="/ventportal/product-category/{{ category }}">
+            {{ category }}
+            </a></p>
+        {% endfor %}
+
+    </div>
+</body>
+</html>

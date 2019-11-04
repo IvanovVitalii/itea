@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>VentPortal</title>
+    {% endif %}
+</head>
+<body>
+    <center><h1>VentPortal</h1></center>
+
+    <div align="center">
+        <h1>Edit Product Categories</h1>
+        {% for category in category %}
+            <p>
+                {{ category }}
+            </p>
+        {% endfor %}
+        <br>
+        <p><a href="/ventportal/admin/add-product">
+            Add Product
+        </a></p>
+        <br>
+        <p><a href="/ventportal/admin/add-category">
+            Add Product Category
+        </a></p>
+
+    </div>
+</body>
+</html>
