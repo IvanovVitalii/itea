@@ -100,7 +100,7 @@ def add_student(name_surname, num_student, id_faculty, id_group):
 def change_name_surname(mutable_user):
     name, surname = input('Enter new student name and surname\n').split()
     mutable_user1 = name.capitalize() + ' ' + surname.capitalize()
-    sql = f'UPDATE students SET name_surname = ? WHERE name_surname = ? '
+    sql = 'UPDATE students SET name_surname = ? WHERE name_surname = ? '
     with ContextManagerSQLite('students base.db') as s:
         s.execute(sql, [mutable_user1, mutable_user])
     return mutable_user1
@@ -108,13 +108,13 @@ def change_name_surname(mutable_user):
 
 def change_student_number(mutable_user):
     new_num_student = input('Enter new student name and surname\n')
-    sql = f'UPDATE students SET num_student = ? WHERE name_surname = ? '
+    sql = 'UPDATE students SET num_student = ? WHERE name_surname = ? '
     with ContextManagerSQLite('students base.db') as s:
         s.execute(sql, [new_num_student, mutable_user])
 
 
 def change_student_group(mutable_user, id_group):
-    sql = f'UPDATE students SET id_group = ? WHERE name_surname = ? '
+    sql = 'UPDATE students SET id_group = ? WHERE name_surname = ? '
     with ContextManagerSQLite('students base.db') as s:
         s.execute(sql, [str(id_group), mutable_user])
 

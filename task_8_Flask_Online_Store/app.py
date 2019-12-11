@@ -1,7 +1,7 @@
 from flask import (Flask,
                    render_template,
                    request)
-from ITEA_hw.task_7.ContextManagerSQLite import ContextManagerSQLite
+from task_7.ContextManagerSQLite import ContextManagerSQLite
 
 app = Flask(__name__)
 
@@ -131,6 +131,3 @@ def add_product():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# https://pythonru.com/uroki/11-rabota-s-formami-vo-flask
-# https://nubex.ru/blog/seryozha_siroezhkin/select_html/

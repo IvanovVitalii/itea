@@ -1,6 +1,6 @@
 import telebot
 import config
-from ITEA_hw.task_7.ContextManagerSQLite import ContextManagerSQLite
+from task_7.ContextManagerSQLite import ContextManagerSQLite
 
 bot = telebot.TeleBot(config.TOKEN)
 
@@ -8,7 +8,7 @@ bot = telebot.TeleBot(config.TOKEN)
 def check_id(value):
     users_id = []
     user_id = value
-    sql = f'SELECT id, id_telegram FROM users '
+    sql = 'SELECT id, id_telegram FROM users '
     with ContextManagerSQLite('people.db') as s:
         query_response = s.execute(sql)
         for i in query_response:
@@ -23,9 +23,9 @@ def check_id(value):
 def check_name(value):
     n_name_user = ''
     user_id = str(value)
-    sql = f'SELECT id, name FROM users WHERE id_telegram={user_id} '
+    sql = 'SELECT id, name FROM users WHERE id_telegram=? '
     with ContextManagerSQLite('people.db') as s:
-        query_response = s.execute(sql)
+        query_response = s.execute(sql, [user_id])
         for n in query_response:
             n_id, n_name_user = n
         if n_name_user != '0':
@@ -37,9 +37,9 @@ def check_name(value):
 def check_tel(value):
     t_tel_user = ''
     user_id = str(value)
-    sql = f'SELECT id, tel FROM users WHERE id_telegram={user_id} '
+    sql = 'SELECT id, tel FROM users WHERE id_telegram=? '
     with ContextManagerSQLite('people.db') as s:
-        query_response = s.execute(sql)
+        query_response = s.execute(sql, [user_id])
         for t in query_response:
             t_id, t_tel_user = t
         if t_tel_user != '0':
@@ -51,9 +51,9 @@ def check_tel(value):
 def check_email(value):
     e_email_user = ''
     user_id = str(value)
-    sql = f'SELECT id, email FROM users WHERE id_telegram={user_id} '
+    sql = 'SELECT id, email FROM users WHERE id_telegram=? '
     with ContextManagerSQLite('people.db') as s:
-        query_response = s.execute(sql)
+        query_response = s.execute(sql, [user_id])
         for e in query_response:
             e_id, e_email_user = e
         if e_email_user != '0':
@@ -65,9 +65,9 @@ def check_email(value):
 def check_wishes(value):
     w_wishes_user = ''
     user_id = str(value)
-    sql = f'SELECT id, wishes FROM users WHERE id_telegram={user_id} '
+    sql = 'SELECT id, wishes FROM users WHERE id_telegram=? '
     with ContextManagerSQLite('people.db') as s:
-        query_response = s.execute(sql)
+        query_response = s.execute(sql, [user_id])
         for w in query_response:
             w_id, w_wishes_user = w
         if w_wishes_user != '0':
@@ -83,27 +83,27 @@ def add_id_telegram(value):
 
 
 def add_name(value):
-    sql = f'UPDATE users SET name="{value}" WHERE name="{0}" '
+    sql = 'UPDATE users SET name=? WHERE name=? '
     with ContextManagerSQLite('people.db') as s:
-        s.execute(sql)
+        s.execute(sql, [value, str(0)])
 
 
 def add_tel(value):
-    sql = f'UPDATE users SET tel="{value}" WHERE tel="{0}" '
+    sql = 'UPDATE users SET tel=? WHERE tel=? '
     with ContextManagerSQLite('people.db') as s:
-        s.execute(sql)
+        s.execute(sql, [value, str(0)])
 
 
 def add_email(value):
-    sql = f'UPDATE users SET email="{value}" WHERE email="{0}" '
+    sql = 'UPDATE users SET email=? WHERE email=? '
     with ContextManagerSQLite('people.db') as s:
-        s.execute(sql)
+        s.execute(sql, [value, str(0)])
 
 
 def add_wishes(value):
-    sql = f'UPDATE users SET wishes="{value}" WHERE wishes="{0}" '
+    sql = 'UPDATE users SET wishes=? WHERE wishes=? '
     with ContextManagerSQLite('people.db') as s:
-        s.execute(sql)
+        s.execute(sql, [value, str(0)])
 
 
 @bot.message_handler(commands=['start'], func=lambda message: check_id(message.chat.id))
@@ -138,7 +138,7 @@ def start_wishes(message):
 
 @bot.message_handler(func=lambda message: True)
 def start_end(message):
-    bot.send_message(message.chat.id, 'Hi.')
+    bot.send_message(message.chat.id, 'Hi. Your information is already in the database.')
 
 
 bot.polling(none_stop=True)

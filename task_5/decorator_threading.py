@@ -37,10 +37,3 @@ def download(http, name):
 
 
 download()
-
-
-# https://linuxconfig.org/how-to-perform-http-requests-with-python-part-2-the-request-library
-# urllib.request.urlretrieve python
-# https://docs.python.org/3/library/urllib.request.html#urllib.request.urlretrieve
-
-
