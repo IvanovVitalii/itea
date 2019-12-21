@@ -36,32 +36,35 @@ def parse(html):
     return forecast
 
 
-def get_weather_data(z, day, town=None):
-    list_weather = []
+def get_weather_data(z, day):
     for i in z:
-        l = list(i.values())
-        if day in l:
-            list_weather = l
-    return list_weather
-
+        list_weather = list(i.values())
+        if day in list_weather:
+            return list_weather
+    return 'Дата не найдена'
 
 
 def main():
 
-    city = f'погода-{input("введите город")}'
+    city = f'погода-{input("введите город: ")}'
     city = quote(city)
     print(city)
 
-
-    a = get_html(URL)
-    z = parse(a)
-    day = input('day:')
+    try:
+        s = f'{URL}/{city}'
+        a = get_html(s)
+        z = parse(a)
+    except:
+        s = URL
+        a = get_html(s)
+        z = parse(a)
+    day = input('Введите дату:')
     y = get_weather_data(z, day)
-    for i in y:
-        print(i)
-
-
-
+    if type(y) == list:
+        for i in y:
+            print(i)
+    else:
+        print(y)
 
 
 if __name__ == '__main__':
